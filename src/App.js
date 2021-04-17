@@ -4,7 +4,7 @@ import Pokemon from './components/Pokemon';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './pages/home';
 import Pokedex from './pages/pokedex';
-import Input from './components/Input';
+import Input from './components/NavButton';
 import './App.css';
 
 const initialPokemons = [ 
