@@ -1,8 +1,10 @@
-import NavBar from '../components/NavBar';
+import Header from '../components/Header';
+import PageHeader from '../components/PageHeader';
 
 export default function Home () {
     return <div>
-        <NavBar />
-        <h1>Home</h1>
+        {/* <PageHeader /> */}
+        <Header />
+        <h1 >Pelo mundo viajarei<br />Tentando encontrar<br />Um Pokémon e com o seu poder<br />Tudo transformar<br />(...)<br />POKEMON!</h1>
     </div>
 }
