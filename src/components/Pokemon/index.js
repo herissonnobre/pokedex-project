@@ -10,9 +10,9 @@ export default function Pokemon ({ pokemon }) {
     return <figure className="pokemon_toten">
         {/* <Styled.Label done={pokemon.done}> */}
         
-        {/* <label>
+        {/* <label> */}
             {/* <input type="checkbox" onChange={handleCheckbox} checked={pokemon.done}/> */}
-            {/* {pokemon.name}  */}
+            {/* {pokemon.name} */}
         {/* </label> */}
         
             <img src={pokemon.image_url} alt={pokemon.name} />
