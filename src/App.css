@@ -1,13 +1,10 @@
-.App {
-    color: white;
+.Pokedex, .Home {
+    background-color: white;
     font-family: Georgia, "Times New Roman", serif;
     text-align: center;
+    width: 100%;
 }
 
-.Pokedex {
-    width: 920px;
-    margin: 0px auto;
-}
     
     /* display: flex;
     flex-direction: column;

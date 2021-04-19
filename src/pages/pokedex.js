@@ -1,11 +1,11 @@
 import Header from '../components/Header';
-import PageHeader from '../components/PageHeader';
+// import PageHeader from '../components/PageHeader';
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Pokemon from '..//components/Pokemon';
 import Home from '../pages/home';
-import NavButton from '../components/NavButton';
+// import NavButton from '../components/NavButton';
 import './styles.css';
 
 export default function Pokedex () {
@@ -93,24 +93,23 @@ export default function Pokedex () {
   }, []);
 
 
-    return <div>
+    return <div id="pokedex">
       {/* <PageHeader /> */}
-      <Header />
+      <div className="pageHeader"><Header /></div>
       {/* <h1>Pokedex!</h1> */}
       {/* <div className="App"> */}
         {/* <h1>{error}</h1> */}
         {/* <Input addPokemon={addPokemon} /> */}
-      <div className="Pokedex">
-        
+      <div id="pokemonPortrait">
         {pokemons.map(pokemon => (
           // <Pokemon key={pokemon.id} pokemon={pokemon} removePokemon={removePokemon} togglePokemon={togglePokemon}/>
           <Pokemon pokemon={pokemon}/>
         ))}
       </div>
       {/* </div> */}
-      <div>
+      {/* <div> */}
         {/* <NavButton /> */}
-      </div>
+      {/* </div> */}
     </div>
 }
 

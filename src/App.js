@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ReactDOM } from 'react';
 import axios from 'axios';
 import Pokemon from './components/Pokemon';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './pages/home';
 import Pokedex from './pages/pokedex';
-import Input from './components/NavButton';
+// import Input from './components/NavButton';
 import './App.css';
 
 const initialPokemons = [ 
@@ -114,7 +114,7 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route path="/pokedex">
-          <Pokedex />
+          <Pokedex className="Pokedex"/>
             {/* <div className="App"> */}
               {/* <h1>{error}</h1> */}
               {/* <Input addPokemon={addPokemon} /> */}
@@ -127,7 +127,7 @@ function App() {
             {/* </div> */}
         </Route>
         <Route path="/">
-          <Home />
+          <Home className="Home"/>
         </Route>
       </Switch>
     </BrowserRouter>

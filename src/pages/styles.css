@@ -1,0 +1,23 @@
+/* #pageHeader { */
+    /* background-color: black;
+    margin: 0px;
+    padding: 0px; */
+/* } */
+
+.pageHeader {
+    display: flex;
+}
+
+#pokemonSong {
+    background-color: turquoise;
+    color: black;
+    text-align: center;
+    margin: 0px;
+    padding: 0px 0px;
+}
+
+#pokemonPortrait {
+    display: flex;
+    flex-direction: column;
+}
+
