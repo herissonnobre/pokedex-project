@@ -17,56 +17,59 @@ export default function Pokedex () {
   useEffect(() => {
     
     
-    async function fetchPokemons(i) {
+    async function fetchPokemons() {
       // for (let i = 1; i <= 3; i++) {
+        // console.log(pokemons);
         try {  
           const response = [];
           for (let i = 1; i <= 33; i++) {
             response[i-1] = await axios.get('https://pokedex20201.herokuapp.com/pokemons?page=' + i);
           }
-          // console.log(response);
+          // console.log(response[0].data);
           // console.log(response.data.data[2]);
 
           const fetchedPokemons = [];
-          let pokemonTotal = [];
+          const allFetchedPokemons = [];
 
           for (let i = 0; i < 33; i++) {
             fetchedPokemons[i]= response[i].data.data;
-            pokemonTotal = pokemons.push(fetchedPokemons[i]);
-            console.log(pokemonTotal);
+            // console.log(fetchedPokemons[i]);
+            for (let j = 0; j < response[i].data.size; j++) 
+              allFetchedPokemons.push(fetchedPokemons[i][j]);
+            console.log(allFetchedPokemons);
           }
           
-          console.log(fetchedPokemons);
+          // console.log(fetchedPokemons);
           // pokemons.push(fetchedPokemons.map(pokemon => ({
           
-          const mappedPokemons =  fetchedPokemons.map(pokemon => ({
-            id: pokemon.id,
-            name: pokemon.name,
-            image_url: pokemon.image_url,
-            number: pokemon.number,
-            weight: pokemon.weight,
-            height: pokemon.height,
-            kind: pokemon.kind, 
-            created_at: pokemon.created_at,
-            updated_at: pokemon.updated_at
-          }));
+          // const mappedPokemons =  fetchedPokemons.map(pokemon => ({
+          //   id: pokemon.id,
+          //   name: pokemon.name,
+          //   image_url: pokemon.image_url,
+          //   number: pokemon.number,
+          //   weight: pokemon.weight,
+          //   height: pokemon.height,
+          //   kind: pokemon.kind, 
+          //   created_at: pokemon.created_at,
+          //   updated_at: pokemon.updated_at
+          // }));
 
-          console.log(mappedPokemons);
+          // console.log(mappedPokemons);
           
           // var joined = this.state.pokemons.concat(mappedPokemons);
           // this.setState({ pokemons: joined });
           
-          console.log(pokemons);
+          // console.log(pokemons);
 
           // const pokemonTotal = pokemons.concat(mappedPokemons);
 
-          setPokemons(pokemonTotal);
+          setPokemons(allFetchedPokemons);
 
-          console.log(pokemonTotal);
+          // console.log(pokemons);
 
           // console.log(Object.getOwnPropertyNames(pokemons.length).sort());
         } catch (error) {
-          // setError(error.response.data);
+          setError(error.response.data);
         }
       // }
     }
