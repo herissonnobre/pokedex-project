@@ -1,6 +1,7 @@
 import { useState } from "react";
 import * as Styled from './styles';
 import { NavLink } from 'react-router-dom';
+import './styles.css';
 
 
 // export default function NavButton({ addPokemon }) {
@@ -34,8 +35,8 @@ export default function FavButton () {
         // <Styled.Input className="input" value={value} onChange={(event) => setValue(event.target.value)} />
         // <Styled.Button className="button" type="submit">+</Styled.Button>
     // </form>  
-    return <div class="button">
-        <input type="button" />
+    return <div id="button">
+        <input type="button" value="oi"/>
     </div>
     
     // <input type="button" onClick={handleLike} value={button_url}> <img src={button_url} alt="Like" height="50px" width="50px" />
