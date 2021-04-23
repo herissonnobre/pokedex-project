@@ -2,48 +2,23 @@
     background-color: white;
 }
 
-/* #pokemonPortrait {
-    display: flex;
-    flex-direction: column wrap; 
-    height: 100%;
-    /* height: 100%; */
-    /* width: 100%; */
-/* } */
-
 #pokemonPortraitInside {
-    display: flex;
-    /* flex-basis: 20%; */
-   
+    display: flex;  
     flex: 0 0 100px;
     margin: 5px;
     justify-content: space-around;
-    /* margin-top: 50px; */
 }
 
 .pokemonToten {
     display: flex;
     flex-direction: column;
     align-self: center;
-    
-    /* position:absolute; */
-    /* height: 100%; */
-    /* width: 100% */
-    /* width: 20%; */
-    /* float: left; */
-    /* margin: 20px; */
-    /* height: 198px; */
-    /* background-repeat: no-repeat; */
-    /* background-position: bottom; */
 }
 
 figure {
     display: flex;
-    flex-direction: column;
-    /* width: 200px; */
-    /* height: 170px; */
+    flex-direction: column; 
     background-color: #e7e3d8;
-    /* padding: 10px; */
-    /* text-align: left; */
 }
 
 #pokemonImg {
@@ -54,25 +29,8 @@ figure {
     align-self: center;
     text-transform: capitalize;
 }
-    
-/* figure img { */
-    /* width: 200px; */
-    /* height: 150px; */
-    /* border: 1px solid #d6d6d6; */
-/* } */
-
-/* figcaption {
-    display: flex;
-    flex-direction: column;
-    padding-left: 0px;
-    background-repeat: no-repeat;
-    text-align: center;
-} */
 
 input#favIcon {
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* flex-direction: column; */
     align-self: center;
 }
 

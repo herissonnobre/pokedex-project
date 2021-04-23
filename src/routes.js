@@ -1,7 +1,6 @@
 import React from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Header from './components/Header';
-import PokemonsList from './components/PokemonsList';
 import Home from './pages/home';
 import Pokedex from './pages/pokedex';
 
@@ -13,10 +12,7 @@ export const Routes = () => {
             <div className="pageHeader"><Header /></div>
             <Switch>
                 <Route className="Home" exact path="/" component={Home} />
-                <Route className="Pokedex" exact path="/pokedex" component={Pokedex}>
-                    <Redirect to="/pokedex/1" component={PokemonsList} />
-                </Route>
-                <Route className="PokemonsList" path="/pokedex/:pageId" component={PokemonsList} />
+                <Route className="Pokedex" exact path="/pokedex" component={Pokedex} />
             </Switch>
         </div> 
     )
