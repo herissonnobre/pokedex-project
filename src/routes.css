@@ -1,0 +1,11 @@
+.Pokedex, .Home {
+    background-color: white;
+    font-family: Georgia, "Times New Roman", serif;
+    text-align: center;
+    width: 100%;
+}
+
+#routes {
+    display: flex;
+    flex-direction: column;
+}

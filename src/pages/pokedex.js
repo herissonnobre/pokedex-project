@@ -1,43 +1,106 @@
-import Header from '../components/Header';
+// import Header from '../components/Header';
 // import PageHeader from '../components/PageHeader';
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import Pokemon from '..//components/Pokemon';
-import Home from '../pages/home';
-import PageNav from '../components/PageNav';
+import { Link, matchPath, Redirect, generatePath } from 'react-router-dom';
+import Paginate from 'react-paginate';
+import Pagination from 'react-router-pagination';
+import Pokemon from '../components/Pokemon';
+import PokemonList from '../components/PokemonsList';
+// import Home from '../views/home';
+// import PageNav from '../components/PageNav';
 // import NavButton from '../components/NavButton';
 import './styles.css';
 
-export default function Pokedex () {
-    
-  const [pokemons, setPokemons] = useState([]);
-  const [pageIndex, setPageIndex] = useState(1);
-  // const [counter, setCounter] = useState(1);
-  const [error, setError] = useState("");
-  const [pageIndexers, setPageIndexers] = useState([]);
-  const pageIndexes = [];
+// export default function Pokedex () {
+const Pokedex = ({ match }) => {
 
   
-  useEffect(() => {
+  const [currentPage, setCurrentPage] = useState(1);
+  // const [pokemons, setPokemons] = useState([]);
+  // const [pageIndex, setPageIndex] = useState(1);
+
+  // const [counter, setCounter] = useState(1);
+
+  // const [error, setError] = useState("");
+  // const [pageIndexers, setPageIndexers] = useState([]);
+
+  console.log(match);
+  
+  // console.log(history);
+
+  const handlePageChange = ({ selected: selectedPage}) => {
+    const temp = selectedPage + 1;
+    setCurrentPage(temp);
+  }
+  
+  const handleActivePage = ({ selected: selectedItem }) => {
+    const temp = selectedItem + 1;
+    setCurrentPage(temp);
+  }
+
+  const onClick = ( event ) => {
+    console.log(event.currentPage);
+  //   console.log(hrefBuilder);
+  }
+
+  // const renderPokemonsList = ( currentPage ) => {
+  //   return (
+  //     <div>
+
+  //     </div>
+  //   )
+  // }
+
+  // useEffect(() => {
+  //   function pokemonsListRender ( currentPage ) {
+  //     return (
+  //       <div><PokemonList page={currentPage} /></div>
+  //     )
+  //   }
+  // }, []);
+
+  // const 
+  
+  console.log(currentPage);
+
+    // useEffect(() => {
     
     
-    async function fetchPokemons() {
+  //   async function fetchPokemons() {
+
+
       // for (let i = 1; i <= 3; i++) {
         // console.log(pokemons);
-      try {  
-        let i = 1;
+      
+      // try {  
+        
+          // let i = 1;
         // const response = [];
         // for (let i = 1; i <= 33; i++) {
-          const response = await axios.get('https://pokedex20201.herokuapp.com/pokemons?page=' + i);
+          
+        
+        // const response = await axios.get('https://pokedex20201.herokuapp.com/pokemons?page=' + pageIndex);
+        
         // }
         
         // const fetchedPokemons = [];
         // const allFetchedPokemons = [];
 
         // for (let i = 0; i < 33; i++) {
-          const fetchedPokemons = response.data.data;
-          setPageIndex(response.data.next_page);
+          
+        
+        // const fetchedPokemons = response.data.data;
+        
+        
+        // console.log(fetchedPokemons);
+        
+        
+          // setPageIndex(response.data.next_page);
+          
+          
+          // console.log(pageIndex);
           // for (let j = 0; j < response[i].data.size; j++) 
             // allFetchedPokemons.push(fetchedPokemons[i][j]);
           // console.log(allFetchedPokemons);
@@ -67,63 +130,72 @@ export default function Pokedex () {
 
         // const pokemonTotal = pokemons.concat(mappedPokemons);
 
-        setPokemons(fetchedPokemons);
+        // setPokemons(fetchedPokemons);
+        
+        
         // setPageIndex(pageIndexer);
 
         
 
         // console.log(Object.getOwnPropertyNames(pokemons.length).sort());
-      } catch (error) {
-        setError(error.response.data);
-      }
+      
+      
+      // } catch (error) {
+      //   setError(error.response.data);
+      // }
 
         // }
-    }
+    // }
     
-    console.log(pokemons);
+    // console.log(pageIndex);
+    
+    // const checkPage = () => {
+    //   if (pageIndex != null) { 
+    //     setPageIndex(pageIndex - 1);
+    //   } else {
+    //     setPageIndex(33);
+    //   }
 
-    const checkPage = () => {
-      if (pageIndex != null) { 
-          setPageIndex(pageIndex - 1);
-      } else {
-          setPageIndex(33);
-      }   
-    };
+    // };
+    
+    // console.log(pokemons);
 
+    // const runNav = () => {
+    //   // const pagePreIndexes = [], pageMidIndexes = [], pagePosIndexes = [];
 
-    const runNav = () => {
-      // const pagePreIndexes = [], pageMidIndexes = [], pagePosIndexes = [];
+    //   checkPage();
+    //   // console.log(pageIndex);
 
-      checkPage();
+    //   const pageIndexes = [];
 
-      if (pageIndex <= 4) {
-          for (let i = 1; i <= 5; i++) {
-              pageIndexes.push(i);
-          }
-          pageIndexes.push("...")
-          pageIndexes.push(33);
-      } else {
-          if (pageIndex > 4 && pageIndex < 30) {
-              pageIndexes.push(1);
-              pageIndexes.push("...")
-              pageIndexes.push(pageIndex - 1);
-              pageIndexes.push(pageIndex);
-              pageIndexes.push(pageIndex + 1);
-              pageIndexes.push("...");
-              pageIndexes.push(33);
-              // pageMidIndexes[1] = pageIndex;
-              // pageMidIndexes[2] = pageIndex + 1;
-              // pagePosIndexes[0] = 33;
-          } else {
-              if (pageIndex >= 30) {
-                  pageIndexes.push(1);
-                  pageIndexes.push("...");
-                  for (let i = 29; i <= 33; i++) {
-                      pageIndexes.push(i);
-                  }
-              }
-          }
-      }
+    //   if (pageIndex <= 4) {
+    //       for (let i = 1; i <= 5; i++) {
+    //           pageIndexes.push(i);
+    //       }
+    //       pageIndexes.push("...")
+    //       pageIndexes.push(33);
+    //   } else {
+    //       if (pageIndex > 4 && pageIndex < 30) {
+    //           pageIndexes.push(1);
+    //           pageIndexes.push("...")
+    //           pageIndexes.push(pageIndex - 1);
+    //           pageIndexes.push(pageIndex);
+    //           pageIndexes.push(pageIndex + 1);
+    //           pageIndexes.push("...");
+    //           pageIndexes.push(33);
+    //           // pageMidIndexes[1] = pageIndex;
+    //           // pageMidIndexes[2] = pageIndex + 1;
+    //           // pagePosIndexes[0] = 33;
+    //       } else {
+    //           if (pageIndex >= 30) {
+    //               pageIndexes.push(1);
+    //               pageIndexes.push("...");
+    //               for (let i = 29; i <= 33; i++) {
+    //                   pageIndexes.push(i);
+    //               }
+    //           }
+    //       }
+    //   }
 
       // if (pageMidIndexes.length !== 0) {
       //     pageIndexes.push(pagePreIndexes);
@@ -138,19 +210,22 @@ export default function Pokedex () {
       // }
 
 
-      pageIndexes.unshift("<");
-      pageIndexes.push(">");
-      console.log(pageIndexes);
-      setPageIndexers(pageIndexes);
-    }
+    //   pageIndexes.unshift("<");
+    //   pageIndexes.push(">");
+    //   console.log(pageIndexes);
+    //   setPageIndexers(pageIndexes);
+    // }
 
     // }          
     // }, []);
     // for (let i=1; i<=33; i++)
-    fetchPokemons();
-    runNav();
-    console.log(pageIndexers);
-    console.log(pageIndex);
+    
+    
+    // fetchPokemons();
+    // runNav();
+    // console.log(pokemons);
+    // console.log(pageIndexers);
+    // console.log(pageIndex);
 
 
     // console.log(pageIndexes);
@@ -168,36 +243,97 @@ export default function Pokedex () {
     // let a = pokemons.map(pokemon => pokemon.name);
     // console.log(a[5]);
     
-  }, []);
-
-  
+  // }, []);
 
 
-    return <div id="pokedex">
+
+
+    return (
+      <div id="pokedex">
+        
+        {/* <h3>Pokemons Pages</h3> */}
+        {/* <ul>
+          <li>
+            <Link to={`${match.url}/1`}>Page 1</Link>
+          </li>
+          <li>
+            <Link to={`${match.url}/2`}>Page 2</Link>
+          </li>
+        </ul> */}
+        
+        {/* <div>
+          { currentPage => 
+            <PokemonList page={currentPage} />
+          }
+        </div> */}
+        
+        {/* <Paginate
+          previousLabel={"← Previous"}
+          nextLabel={"Next →"}
+          pageCount={33}
+          pageRangeDisplayed={3}
+          marginPagesDisplayed={1}
+          // initialPage = {0}
+          // disableInitialCallback = {true}
+          onPageChange={handlePageChange}
+          onPageActive={handleActivePage}
+          containerClassName={"pagination"}
+          previousLinkClassName={"pagination__link"}
+          nextLinkClassName={"pagination__link"}
+          disabledClassName={"pagination__link--disabled"}
+          activeClassName={"pagination__link--active"}
+          hrefBuilder={(page) =>  `${match.url}/` + page }
+          // pageLabelBuilder={ (index) => "oi" + index }
+          eventListener={onClick}
+        /> */}
+      
+
+
+      <Pagination 
+        totalPages={33} 
+        match={
+          {
+            path: '/pokedex/:pageNumber'
+          }
+        }
+        
+        spread={5}
+        // format="center"
+      />
+
       {/* <PageHeader /> */}
-      <div className="pageHeader"><Header /></div>
+      {/* <div className="pageHeader"><Header /></div> */}
       {/* <h1>Pokedex!</h1> */}
       {/* <div className="App"> */}
         {/* <h1>{error}</h1> */}
         {/* <Input addPokemon={addPokemon} /> */}
-      <div id="pokemonPortrait">
-        {pokemons.map(pokemon => (
-          // <Pokemon key={pokemon.id} pokemon={pokemon} removePokemon={removePokemon} togglePokemon={togglePokemon}/>
-          <Pokemon pokemon={pokemon}/>
-        ))}
+        
+
+
+        {/* <div id="pokemonPortrait">
+          {pokemons.map(pokemon => (
+            // <Pokemon key={pokemon.id} pokemon={pokemon} removePokemon={removePokemon} togglePokemon={togglePokemon}/>
+            <Pokemon pokemon={pokemon}/>
+          ))}
+        </div>
+        <Pagination totalPages={33} pageNumber={1} spread={5} /> */}
+
+        {/* <div className="pageSelector"> */}
+          {/* <span className="selected"></span> */} 
+          {/* {pageIndexers.map(pageIndexer => ( */}
+          {/* {pageIndexers.map(pageIndexer => (
+            // <PageNav pageIndex={pageIndexer} />       */}
+          {/* ))} */}
+          {/* ))} */}
+        {/* </div> */}
+        {/* </div> */}
+        {/* <div> */}
+          {/* <NavButton /> */}
+        {/* </div> */}
+
       </div>
-      <div className="pageSelector">
-        {/* <span className="selected"></span> */} 
-        {/* {pageIndexers.map(pageIndexer => ( */}
-        {pageIndexers.map(pageIndexer => (
-          <PageNav pageIndex={pageIndexer} />      
-        ))}
-        {/* ))} */}
-      </div>
-      {/* </div> */}
-      {/* <div> */}
-        {/* <NavButton /> */}
-      {/* </div> */}
-    </div>
-}
+    );
+};
+
+export default Pokedex;
 

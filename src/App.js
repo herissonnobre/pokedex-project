@@ -6,6 +6,9 @@ import Home from './pages/home';
 import Pokedex from './pages/pokedex';
 // import Input from './components/NavButton';
 import './App.css';
+import reactRouterPagination from 'react-router-pagination';
+import Header from './components/Header';
+
 
 const initialPokemons = [ 
   {
@@ -111,26 +114,29 @@ function App() {
 
 
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/pokedex">
-          <Pokedex className="Pokedex"/>
-            {/* <div className="App"> */}
-              {/* <h1>{error}</h1> */}
-              {/* <Input addPokemon={addPokemon} /> */}
-              {/* <div className="Pokedex"> */}
-                {/* {pokemons.map(pokemon => ( */}
-                  {/* // <Pokemon key={pokemon.id} pokemon={pokemon} removePokemon={removePokemon} togglePokemon={togglePokemon}/> */}
-                  {/* <Pokemon key={pokemon.id} pokemon={pokemon}/> */}
-                {/* ))} */}
+    <div>
+      <div className="pageHeader"><Header /></div>
+      <BrowserRouter>
+          <Route className="Home" exact path="/" component={Home} />
+            {/* <Home className="Home"/> */}
+          {/* </Route> */}
+          <Route className="Pokedex" path="/pokedex" component={Pokedex} />
+          {/* <Route component={NoMatch} /> */}
+            {/* <Pokedex className="Pokedex"/> */}
+              {/* <div className="App"> */}
+                {/* <h1>{error}</h1> */}
+                {/* <Input addPokemon={addPokemon} /> */}
+                {/* <div className="Pokedex"> */}
+                  {/* {pokemons.map(pokemon => ( */}
+                    {/* // <Pokemon key={pokemon.id} pokemon={pokemon} removePokemon={removePokemon} togglePokemon={togglePokemon}/> */}
+                    {/* <Pokemon key={pokemon.id} pokemon={pokemon}/> */}
+                  {/* ))} */}
+                {/* </div> */}
               {/* </div> */}
-            {/* </div> */}
-        </Route>
-        <Route path="/">
-          <Home className="Home"/>
-        </Route>
-      </Switch>
-    </BrowserRouter>
+          {/* </Route> */}
+          {/* <Route path="/oi" render={() => <div>Oi</div>}/> */}
+      </BrowserRouter>
+    </div>
   );
 }
 
