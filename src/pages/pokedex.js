@@ -28,7 +28,7 @@ const Pokedex = () => {
       try {  
           const response = await axios.get('https://pokedex20201.herokuapp.com/pokemons?page=' + currentPage);
           const fetchedPokemons = response.data.data;
-          setPokemons(fetchedPokemons);     
+          setPokemons(fetchedPokemons);  
       } catch (error) {
         setError(error.response.data);
       }
@@ -40,17 +40,17 @@ const Pokedex = () => {
   return (
     <div id="pokedex">
       <div id="pokemonPortrait">
-          {pokemons.map(pokemon => (
-            <Link
-              key={pokemon.id}
-              to ={{
-                pathname:`/pokedex/${pokemon.id}`,
-                state: { background: location, pokemonArray: pokemons }
-              }}
-            >
-              <Pokemon pokemon={pokemon}/>
-            </Link>
-          ))}
+        {pokemons.map(pokemon => (
+          <Link
+            key={pokemon.id}
+            to ={{
+              pathname:`/pokedex/${pokemon.id}`,
+              state: { background: location, pokemonArray: pokemons }
+            }}
+          >
+            <Pokemon pokemon={pokemon}/>
+          </Link>
+        ))}
       </div>
       <Paginate
         previousLabel={"← Previous"}
