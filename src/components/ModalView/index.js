@@ -1,17 +1,25 @@
-import { useParams, useHistory } from 'react-router-dom';
+import { match, useParams, useHistory, useLocation } from 'react-router-dom';
 
     
 const ModalView = () => {
-
+    
     let history = useHistory();
     let { id } = useParams();
-    // let image = IMAGES[parseInt(id, 10)];
+    
+    let states = useLocation();
+    const pokemonArray = states.state.pokemonArray;
+    const index = parseInt(id, 10);
+    const clickedPokemon = pokemonArray.find(pokemon => pokemon.id === index);
 
-    // if (!image) return null;
+    console.log(id);
+    console.log(history);
+
+    if (!clickedPokemon)
+        return null;
 
     let back = e => {
-    e.stopPropagation();
-    history.goBack();
+        e.stopPropagation();
+        history.goBack();
     };
 
     return (
@@ -38,8 +46,8 @@ const ModalView = () => {
             border: "2px solid #444"
         }}
         >
-        {/* <h1>{image.title}</h1> */}
-        {/* <Image color={image.color} /> */}
+            <h1>{clickedPokemon.name}</h1>
+            <img src={clickedPokemon.image_url} alt={clickedPokemon.name} />
         <button type="button" onClick={back}>
             Close
         </button>

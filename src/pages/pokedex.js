@@ -41,12 +41,11 @@ const Pokedex = () => {
     <div id="pokedex">
       <div id="pokemonPortrait">
           {pokemons.map(pokemon => (
-            // <Pokemon key={pokemon.id} pokemon={pokemon} removePokemon={removePokemon} togglePokemon={togglePokemon}/>
             <Link
               key={pokemon.id}
               to ={{
                 pathname:`/pokedex/${pokemon.id}`,
-                state: { background: location }
+                state: { background: location, pokemonArray: pokemons }
               }}
             >
               <Pokemon pokemon={pokemon}/>
