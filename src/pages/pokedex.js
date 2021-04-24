@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Paginate from 'react-paginate';
+import { useHistory, useParams, Link, useLocation } from 'react-router-dom';
 import Pokemon from '../components/Pokemon';
 import './styles.css';
 
@@ -9,6 +10,8 @@ const Pokedex = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pokemons, setPokemons] = useState([]);
   const [error, setError] = useState("");
+
+  let location = useLocation();
 
   const handlePageChange = ({ selected: selectedPage}) => {
     const temp = selectedPage + 1;
@@ -39,7 +42,15 @@ const Pokedex = () => {
       <div id="pokemonPortrait">
           {pokemons.map(pokemon => (
             // <Pokemon key={pokemon.id} pokemon={pokemon} removePokemon={removePokemon} togglePokemon={togglePokemon}/>
-            <Pokemon pokemon={pokemon}/>
+            <Link
+              key={pokemon.id}
+              to ={{
+                pathname:`/pokedex/${pokemon.id}`,
+                state: { background: location }
+              }}
+            >
+              <Pokemon pokemon={pokemon}/>
+            </Link>
           ))}
       </div>
       <Paginate

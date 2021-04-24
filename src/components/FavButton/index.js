@@ -1,6 +1,7 @@
-import { useState } from "react";
-import * as Styled from './styles';
-import { NavLink } from 'react-router-dom';
+// import { useState } from "react";
+// import * as Styled from './styles';
+// import { NavLink } from 'react-router-dom';
+import { React } from 'react';
 import './styles.css';
 
 

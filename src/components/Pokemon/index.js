@@ -1,8 +1,8 @@
-import * as Styled from './styles';
 import './styles.css';
 import FavButton from '../FavButton/';
 
-export default function Pokemon ({ pokemon }) { 
+const Pokemon = ({ pokemon }) => { 
+    
     return <div id="pokemonPortraitInside">
         <div className="pokemonToten">
             <img id="pokemonImg" src={pokemon.image_url} alt={pokemon.name} />
@@ -11,3 +11,5 @@ export default function Pokemon ({ pokemon }) {
         </div>
     </div>
 }
+
+export default Pokemon;
