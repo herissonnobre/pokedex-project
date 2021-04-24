@@ -1,0 +1,15 @@
+.Barra{
+    padding: 20px;
+    background-color: rgb(20, 146, 3);
+    border-radius: 80%;
+    width: 75px;
+    height: 75px;
+    box-sizing: border-box;
+}
+
+.Lista{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: flex-start;
+}

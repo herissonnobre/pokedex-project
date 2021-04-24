@@ -42,6 +42,39 @@
     list-style-type: none;
 }
 
+button{
+    background-color: none;
+    text-decoration-color: cornsilk;
+    padding: 0%;
+    border: none;
+}
+
+.button {
+    display: flex;
+    background-color: #4CAF50; /* Green */
+    border: none;
+    border-radius: 20px;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    text-decoration-color: black;
+    display: inline-block;
+    font-size: 16px;
+    
+}
+
+input{
+    padding: 10px 26px;
+    text-align: center;
+    border-radius: 20px;
+    font-size: 14px;
+    align-self: center;
+}
+
+form{
+    padding: 8px 8px;
+}
+
 /* li#home_link,
 li#pokedex_link
 li#login_button { */

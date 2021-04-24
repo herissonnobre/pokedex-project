@@ -36,7 +36,7 @@ export default function FavButton () {
         // <Styled.Button className="button" type="submit">+</Styled.Button>
     // </form>  
     return <div id="button">
-        <input type="button" value="oi"/>
+        <input className="fav" type="button" value="oi"/>
     </div>
     
     // <input type="button" onClick={handleLike} value={button_url}> <img src={button_url} alt="Like" height="50px" width="50px" />

@@ -9,8 +9,6 @@ const Home = props => {
     
     return (
         <div id="home">
-        {/* <PageHeader /> */}
-        {/* <div className="pageHeader"><Header /></div> */}
             <h1 id="pokemonSong">Pelo mundo viajarei<br />Tentando encontrar<br />Um Pokémon e com o seu poder<br />Tudo transformar<br />(...)<br />POKEMON!</h1>
         </div>
     );

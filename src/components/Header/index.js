@@ -13,17 +13,23 @@ const Header = () => {
             {/* <nav id="nav"> */}
             <div id="nav">
                 <ul id="links">
-                    <li id="home_link"><Link to="/">Home</Link></li>
-                    <li id="pokedex_link"><Link to="/pokedex">Pokedex</Link></li>
-                    <li id="login_button"><input type="button" id="login_button" value="Login" /></li>
-                    
-                    {/* <li id="home_link"><NavLink to="/">Home</NavLink></li> */}
-                    {/* <li id="pokedex_link"><NavLink to="/pokedex">Pokedex</NavLink></li> */}
-                    {/* <li id="login_button"><input type="button" id="login_button" value="Login" /></li> */}
+                    <button id="home_link" >
+                        <Link className="button" to="/">
+                            Home
+                        </Link>
+                    </button>
+                    <button id="pokedex_link">
+                        <Link className="button" to="/pokedex">
+                            Pokedex
+                        </Link>
+                    </button>
+
+                    <form>
+                        <input placeholder="Usuário"></input>
+                        <button className="button" type="submit">Logar</button>
+                    </form>
                 </ul>
             </div>
-            {/* </nav> */}
-            {/* </div> */}
         </div>
     );
 };
