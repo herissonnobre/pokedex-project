@@ -10,8 +10,12 @@ const Pokedex = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pokemons, setPokemons] = useState([]);
   const [error, setError] = useState("");
+  const [repositories, setRepositories] = useState([]);
 
   let location = useLocation();
+
+  console.log(localStorage.user);
+
 
   const handlePageChange = ({ selected: selectedPage}) => {
     const temp = selectedPage + 1;
@@ -37,6 +41,23 @@ const Pokedex = () => {
     fetchPokemons();
   }, [currentPage]);
 
+  function handleFavorite ( id ) {
+    const newRepositories = repositories.map(repo => {
+      return repo.id === id ? { ...repo, favorite: true } : repo
+    });
+    setRepositories(newRepositories);
+  }
+
+  // if (localStorage.user != "true" && localStorage.user != "") {
+  //   document.getElementById('favoriteButton').style.visibility = "visible"; 
+  // } else {
+  //   document.getElementById('favoriteButton').style.visibility = "hidden"; 
+  // }
+
+  // console.log(document.getElementById('favoriteButton').value);
+
+  // console.log(login.status);
+
   return (
     <div id="pokedex">
       <div id="pokemonPortrait">
@@ -48,6 +69,7 @@ const Pokedex = () => {
               state: { background: location, pokemonArray: pokemons }
             }}
           >
+            <button id="favoriteButton" onClick={() => handleFavorite(pokemon.id)}>{'<3'}</button>
             <Pokemon pokemon={pokemon}/>
           </Link>
         ))}

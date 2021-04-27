@@ -18,11 +18,13 @@
 //   event.preventDefault();
 // }
 
-// const isAuthenticated = ( event ) => {
-//     const x = document.forms["loginForm"]["username"].value;
-//     console.log(x);
-//     return true;
-// };
+const isAuthenticated = () => {
+    // const x = document.forms["loginForm"]["username"].value;
+    // console.log(x);
+    return true;
+};
+
+export default isAuthenticated;
 
 // export default isAuthenticated;
 // export default submit;
