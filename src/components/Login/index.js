@@ -6,7 +6,7 @@ import './styles.css';
 
 const Login = () => {
     
-    const [login, setLogin] = useState("");
+    // const [login, setLogin] = useState("");
 
     // console.log(status.status);
 
@@ -19,6 +19,8 @@ const Login = () => {
         },
         pokemons: []
     });
+
+    const [loggedUser, setLoggedUser] = useState("");
 
     const [username, setUsername] = useState("");
 
@@ -37,69 +39,105 @@ const Login = () => {
     //     this.handleChange = this.handleChange.bind(this);
     // }
 
-    const handleChange = ( event ) => {
-        setUsername(event.target.value);
+    console.log(user);
+    
+    async function handleUser ( username ) {
+        // await setUser({ ...user, user: { 'username': document.getElementById('username').value }});
+        setUser({ ...user, user: { 'username': username }});
+        console.log(user);
+    }
+    
+    const handleChange = async event => {
+        // setUsername(event.target.value, setUser({ ...user, user: { 'username': username }}));
+        setUser({ ...user, user: { 'username': event.target.value }});
+        // console.log(user);
+        // handleUser(username);
     };
 
     
-    async function handleLogin ( login ) {
-        await setLogin(login);
-        console.log(login);
-    }
+    // async function handleLogin ( login ) {
+    //     await setLogin(login);
+    //     console.log(login);
+    // }
 
-    async function tryLogin( user ) {
+    async function tryLogin ( ) {
+        
+        // console.log(username);
+        // await setUser({ ...user, user: { 'username': username }});
+        // await handleUser(username);
+        console.log(user);
+        
         try {  
             const response = await axios.post('https://pokedex20201.herokuapp.com/users/', user);
             //   const fetchedPokemons = response.data.data;
             //   setPokemons(fetchedPokemons);
             console.log(response);
-            handleLogin({
-                ...login,
-                status: true,
-                method: response.statusText, 
-                userId: response.data.user.id
-            });
-            return login;
+
+            // handleLogin({
+            //     ...login,
+            //     status: true,
+            //     method: response.statusText, 
+            //     userId: response.data.user.id
+            // });
+            // return login;
         } catch (error) {
             setError(error.response.data);
             try {
                 const response = await axios.get('https://pokedex20201.herokuapp.com/users/' + user.user.username);
                 console.log(response);
-                handleLogin({
-                    ...login,
-                    status: true,
-                    method: response.statusText, 
-                    userId: response.data.user.id
-                });
-                return login;
+                // handleLogin({
+                //     ...login,
+                //     status: true,
+                //     method: response.statusText, 
+                //     userId: response.data.user.id
+                // });
+                // return login;
             } catch {
                 setError(error.response.data);
-                handleLogin({
-                    ...login,
-                    status: true,
-                });
-                return login;
+                // handleLogin({
+                //     ...login,
+                //     status: true,
+                // });
+                // return login;
             }
         }
         
     }
 
-    useEffect(() => {
-        console.log(username);
-        async function handleUser ( ) {
-            await setUser({ ...user, user: { 'username': document.getElementById('username').value }});
-            // setUser({ ...user, user: { 'username': username }});
-        }
-        handleUser();
-    }, [username]);
+    // useEffect(() => {
+    //     console.log(username);
+    //     async function handleUser ( ) {
+    //         await setUser({ ...user, user: { 'username': document.getElementById('username').value }});
+    //         // setUser({ ...user, user: { 'username': username }});
+    //     }
+    //     handleUser();
+    // }, [username]);
 
-    const handleSubmit = ( event ) => {
+    const handleSubmit = async event => {
         event.preventDefault();
-        const tempLogin = tryLogin(user);
-        localStorage.setItem('user', user.user.username);
+        tryLogin();
+        
+        localStorage.setItem('username', user.user.username);
         console.log(localStorage.user);
     }
 
+    useEffect(() => {
+        
+        const loggedInUser = localStorage.getItem("username");
+        console.log(loggedInUser);
+        if (loggedInUser) {
+            console.log(loggedInUser);
+
+        //   const foundUser = JSON.parse(loggedInUser);
+        // const foundUser = loggedInUser;
+        //   console.log(foundUser);
+            // setLoggedUser({...loggedUser, user: { 'username': loggedInUser}});
+            setLoggedUser(...loggedUser, loggedInUser);
+        }
+    }, [loggedUser]);
+
+    console.log(localStorage);
+    console.log(loggedUser);
 
     // let history = useHistory();
     
@@ -123,6 +161,10 @@ const Login = () => {
     //             }
     //         }
     // )
+
+    if (loggedUser !== "null" && loggedUser !== "" && loggedUser != null) {
+        return <div>{loggedUser} is loggged  in</div>;
+    }
 
     return (
         // <div id = "loginDiv" onClick={back}>
