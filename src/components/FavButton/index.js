@@ -36,7 +36,7 @@ export default function FavButton () {
         // <Styled.Button className="button" type="submit">+</Styled.Button>
     // </form>  
     return <div >
-        <input className="fav" type="button" value="fav"/>
+        <input className="fav" type="button" value="<3"/>
         
     </div>
     
