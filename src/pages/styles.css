@@ -60,3 +60,9 @@
     border: 1px solid rgb(198, 197, 202);
   }
 
+  #favButton {
+    width: 20px;
+    height: 20px;
+    padding: 0px;
+  }
+

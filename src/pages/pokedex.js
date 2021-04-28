@@ -2,7 +2,11 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Paginate from 'react-paginate';
 import { useHistory, useParams, Link, useLocation } from 'react-router-dom';
+import { ReactSVG } from 'react-svg';
 import Pokemon from '../components/Pokemon';
+
+import FavImg from '../icons/HeartIcon_WB.svg';
+import NoFavImg from '../icons/HeartIcon_WOB.svg';
 import './styles.css';
 
 const Pokedex = () => {
@@ -70,7 +74,8 @@ const Pokedex = () => {
             }}
           >
             <Pokemon pokemon={pokemon}/>
-            {localStorage.username && <button id="favButton" onClick={() => handleFavorite(pokemon.id)}>{'<3'}</button> } 
+            {/* {localStorage.username && <button id="favButton" onClick={() => handleFavorite(pokemon.id)}>{'<3'}</button> } */}
+            {localStorage.username && <button id="favButton" onClick={() => handleFavorite(pokemon.id)}><img src={FavImg} alt="favImg" /></button> }
           </Link>
         ))}
       </div>

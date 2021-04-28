@@ -6,7 +6,7 @@
     display: flex;  
     flex: 0 0 100px;
     margin: 5px;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .pokemonToten {
