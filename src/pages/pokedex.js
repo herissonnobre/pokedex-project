@@ -16,6 +16,7 @@ const Pokedex = () => {
   const [favPokemons, setFavPokemons] = useState([]);
   const [error, setError] = useState("");
   const [repositories, setRepositories] = useState([]);
+  const [user, setUser] = useState({});
 
   let location = useLocation();
 
@@ -48,6 +49,7 @@ const Pokedex = () => {
         const userResponse = await axios.get('https://pokedex20201.herokuapp.com/users/' + localStorage.username);
         const favoritedPokemons = userResponse.data.pokemons;
         setFavPokemons(favoritedPokemons);
+        setUser({user: userResponse.data.user});
       } catch (error) {
         setError(error.response.data);
       }
@@ -56,8 +58,8 @@ const Pokedex = () => {
     fetchPokemons();
     fetchFavPokemons();
   }, [currentPage]);
-
-  function handleFavorite ( pokemonId ) {
+  
+  function checkFavorite ( pokemonId ) {
     // const newRepositories = repositories.map(repo => {
     //   return repo.id === id ? { ...repo, favorite: true } : repo
     // });
@@ -68,6 +70,31 @@ const Pokedex = () => {
     if (localStorage && favItem !== undefined)
       return true;
 
+  }
+
+  // useEffect(() => {
+    
+  //   axios.put('https://pokedex20201.herokuapp.com/users/')
+
+  //   setUser({user: userResponse.data.user})
+      
+  // }, [newFavPokemons]);
+
+  const handleFavorite = ( pokemon ) => {
+    const newFavPokemons = [];
+
+    if (checkFavorite) {
+      const newFavPokemons = favPokemons.filter( favPokemon => favPokemon.id !== pokemon.id);
+    } else {
+      const newFavPokemons = favPokemons;
+      newFavPokemons.push(pokemon);
+    }
+    setFavPokemons(newFavPokemons);
+
+    
+
+    
+    // axios.delete('https://pokedex20201.herokuapp.com/users/')
   }
 
   // if (localStorage.user != "true" && localStorage.user != "") {
@@ -84,22 +111,26 @@ const Pokedex = () => {
     <div id="pokedex">
       <div id="pokemonPortrait">
         {pokemons.map(pokemon => (
-          <Link
-            key={pokemon.id}
-            to ={{
-              pathname:`/pokedex/${pokemon.id}`,
-              state: { background: location, pokemonArray: pokemons }
-            }}
-          >
-            <Pokemon pokemon={pokemon}/>
-            {/* {localStorage.username && <button id="favButton" onClick={() => handleFavorite(pokemon.id)}>{'<3'}</button> } */}
-            { handleFavorite(pokemon.id) 
+          <div id="pokemonToten">
+            <Link
+              key={pokemon.id}
+              to ={{
+                pathname:`/pokedex/${pokemon.id}`,
+                state: { background: location, pokemonArray: pokemons }
+              }}
+            >
+              <Pokemon pokemon={pokemon}/>
+              {/* {localStorage.username && <button id="favButton" onClick={() => handleFavorite(pokemon.id)}>{'<3'}</button> } */}
+              
+            </Link>
+            { checkFavorite(pokemon.id) 
               ? <button id="favButton" onClick={() => handleFavorite(pokemon.id)}><img src={FavImg} alt="favImg" /></button> 
               : <button id="favButton" onClick={() => handleFavorite(pokemon.id)}><img src={NoFavImg} alt="noFavImg" /></button>
             }
-          </Link>
+          </div> 
         ))}
       </div>
+      
       <Paginate
         previousLabel={"← Previous"}
         nextLabel={"Next →"}
