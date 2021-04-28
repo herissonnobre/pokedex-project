@@ -35,8 +35,9 @@ export default function FavButton () {
         // <Styled.Input className="input" value={value} onChange={(event) => setValue(event.target.value)} />
         // <Styled.Button className="button" type="submit">+</Styled.Button>
     // </form>  
-    return <div id="button">
-        <input className="fav" type="button" value="oi"/>
+    return <div >
+        <input className="fav" type="button" value="fav"/>
+        
     </div>
     
     // <input type="button" onClick={handleLike} value={button_url}> <img src={button_url} alt="Like" height="50px" width="50px" />
