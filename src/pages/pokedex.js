@@ -13,12 +13,13 @@ const Pokedex = () => {
   
   const [currentPage, setCurrentPage] = useState(1);
   const [pokemons, setPokemons] = useState([]);
+  const [favPokemons, setFavPokemons] = useState([]);
   const [error, setError] = useState("");
   const [repositories, setRepositories] = useState([]);
 
   let location = useLocation();
 
-  console.log(localStorage.user);
+  console.log(localStorage.username);
 
 
   const handlePageChange = ({ selected: selectedPage}) => {
@@ -34,22 +35,39 @@ const Pokedex = () => {
   useEffect(() => {
     async function fetchPokemons() {
       try {  
-          const response = await axios.get('https://pokedex20201.herokuapp.com/pokemons?page=' + currentPage);
-          const fetchedPokemons = response.data.data;
-          setPokemons(fetchedPokemons);  
+        const response = await axios.get('https://pokedex20201.herokuapp.com/pokemons?page=' + currentPage);
+        const fetchedPokemons = response.data.data;
+        setPokemons(fetchedPokemons);  
+      } catch (error) {
+        setError(error.response.data);
+      }
+    }
+
+    async function fetchFavPokemons() {
+      try {  
+        const userResponse = await axios.get('https://pokedex20201.herokuapp.com/users/' + localStorage.username);
+        const favoritedPokemons = userResponse.data.pokemons;
+        setFavPokemons(favoritedPokemons);
       } catch (error) {
         setError(error.response.data);
       }
     }
     
     fetchPokemons();
+    fetchFavPokemons();
   }, [currentPage]);
 
-  function handleFavorite ( id ) {
-    const newRepositories = repositories.map(repo => {
-      return repo.id === id ? { ...repo, favorite: true } : repo
-    });
-    setRepositories(newRepositories);
+  function handleFavorite ( pokemonId ) {
+    // const newRepositories = repositories.map(repo => {
+    //   return repo.id === id ? { ...repo, favorite: true } : repo
+    // });
+    // setRepositories(newRepositories);
+
+    const favItem = favPokemons.find(element => element.id ===  pokemonId);
+
+    if (localStorage && favItem !== undefined)
+      return true;
+
   }
 
   // if (localStorage.user != "true" && localStorage.user != "") {
@@ -75,7 +93,10 @@ const Pokedex = () => {
           >
             <Pokemon pokemon={pokemon}/>
             {/* {localStorage.username && <button id="favButton" onClick={() => handleFavorite(pokemon.id)}>{'<3'}</button> } */}
-            {localStorage.username && <button id="favButton" onClick={() => handleFavorite(pokemon.id)}><img src={FavImg} alt="favImg" /></button> }
+            { handleFavorite(pokemon.id) 
+              ? <button id="favButton" onClick={() => handleFavorite(pokemon.id)}><img src={FavImg} alt="favImg" /></button> 
+              : <button id="favButton" onClick={() => handleFavorite(pokemon.id)}><img src={NoFavImg} alt="noFavImg" /></button>
+            }
           </Link>
         ))}
       </div>
