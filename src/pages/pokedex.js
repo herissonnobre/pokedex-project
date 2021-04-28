@@ -69,8 +69,8 @@ const Pokedex = () => {
               state: { background: location, pokemonArray: pokemons }
             }}
           >
-            <button id="favoriteButton" onClick={() => handleFavorite(pokemon.id)}>{'<3'}</button>
             <Pokemon pokemon={pokemon}/>
+            {localStorage.username && <button id="favButton" onClick={() => handleFavorite(pokemon.id)}>{'<3'}</button> } 
           </Link>
         ))}
       </div>

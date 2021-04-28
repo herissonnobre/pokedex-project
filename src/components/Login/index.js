@@ -22,7 +22,7 @@ const Login = () => {
 
     const [loggedUser, setLoggedUser] = useState("");
 
-    const [username, setUsername] = useState("");
+    // const [username, setUsername] = useState("");
 
     const [error, setError] = useState("");
 
@@ -41,16 +41,16 @@ const Login = () => {
 
     console.log(user);
     
-    async function handleUser ( username ) {
-        // await setUser({ ...user, user: { 'username': document.getElementById('username').value }});
-        setUser({ ...user, user: { 'username': username }});
-        console.log(user);
-    }
+    // async function handleUser ( username ) {
+    //     // await setUser({ ...user, user: { 'username': document.getElementById('username').value }});
+    //     setUser({ ...user, user: { 'username': username }});
+    //     console.log(user);
+    // }
     
     const handleChange = async event => {
         // setUsername(event.target.value, setUser({ ...user, user: { 'username': username }}));
         setUser({ ...user, user: { 'username': event.target.value }});
-        // console.log(user);
+        console.log(user);
         // handleUser(username);
     };
 
@@ -116,9 +116,9 @@ const Login = () => {
     const handleSubmit = async event => {
         event.preventDefault();
         tryLogin();
-        
-        localStorage.setItem('username', user.user.username);
-        console.log(localStorage.user);
+        console.log(user.user.username);
+        await localStorage.setItem('username', user.user.username);
+        console.log(localStorage.username);
     }
 
     useEffect(() => {
@@ -132,7 +132,7 @@ const Login = () => {
         // const foundUser = loggedInUser;
         //   console.log(foundUser);
             // setLoggedUser({...loggedUser, user: { 'username': loggedInUser}});
-            setLoggedUser(...loggedUser, loggedInUser);
+            setLoggedUser(loggedInUser);
         }
     }, [loggedUser]);
 
