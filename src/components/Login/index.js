@@ -115,7 +115,7 @@ const Login = () => {
 
     const handleSubmit = async event => {
         event.preventDefault();
-        tryLogin();
+    tryLogin();
         console.log(user.user.username);
         await localStorage.setItem('username', user.user.username);
         console.log(localStorage.username);

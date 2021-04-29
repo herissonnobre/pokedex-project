@@ -12,11 +12,21 @@ import './styles.css';
 const Pokedex = () => {
   
   const [currentPage, setCurrentPage] = useState(1);
+  const [currentUser, setCurrentUser] = useState();
+  // const [currentUsername, setCurrentUsername] = useState(localStorage.username);
   const [pokemons, setPokemons] = useState([]);
   const [favPokemons, setFavPokemons] = useState([]);
+  const [fetchedFavPokemons, setFetchedFavPokemons] = useState([]);
   const [error, setError] = useState("");
   const [repositories, setRepositories] = useState([]);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({
+    user: {
+      username: localStorage.username
+    },
+    pokemons: []
+  });
+  
+  let newFavPokemons = [];
 
   let location = useLocation();
 
@@ -38,74 +48,63 @@ const Pokedex = () => {
       try {  
         const response = await axios.get('https://pokedex20201.herokuapp.com/pokemons?page=' + currentPage);
         const fetchedPokemons = response.data.data;
-        setPokemons(fetchedPokemons);  
+        setPokemons(fetchedPokemons);
       } catch (error) {
         setError(error.response.data);
       }
     }
 
+    fetchPokemons();
+  }, [currentPage]);
+
+  useEffect(() => {
     async function fetchFavPokemons() {
       try {  
-        const userResponse = await axios.get('https://pokedex20201.herokuapp.com/users/' + localStorage.username);
-        const favoritedPokemons = userResponse.data.pokemons;
-        setFavPokemons(favoritedPokemons);
-        setUser({user: userResponse.data.user});
+        const response = await axios.get('https://pokedex20201.herokuapp.com/users/' + localStorage.username);
+        // const favoritedPokemons = response.data.pokemons;
+        // const contextUser = response.data.user;
+        // console.log(favoritedPokemons);
+        setFetchedFavPokemons(response.data.pokemons);
+        setCurrentUser(response.data.user);
+        // setUser(...user, { user: userResponse.data.user });
       } catch (error) {
         setError(error.response.data);
       }
     }
-    
-    fetchPokemons();
+
     fetchFavPokemons();
-  }, [currentPage]);
-  
-  function checkFavorite ( pokemonId ) {
+  }, [localStorage.username]);
+
+
+  const checkFavorite = ( pokemonId ) => {
     // const newRepositories = repositories.map(repo => {
     //   return repo.id === id ? { ...repo, favorite: true } : repo
     // });
     // setRepositories(newRepositories);
 
-    const favItem = favPokemons.find(element => element.id ===  pokemonId);
+    const favItem = fetchedFavPokemons.find(element => element.id === pokemonId);
 
     if (localStorage && favItem !== undefined)
       return true;
-
   }
 
-  // useEffect(() => {
-    
-  //   axios.put('https://pokedex20201.herokuapp.com/users/')
+ 
 
-  //   setUser({user: userResponse.data.user})
-      
-  // }, [newFavPokemons]);
-
-  const handleFavorite = ( pokemon ) => {
-    const newFavPokemons = [];
-
-    if (checkFavorite) {
-      const newFavPokemons = favPokemons.filter( favPokemon => favPokemon.id !== pokemon.id);
+  
+  const handleFavorite = pokemon => {
+    if (checkFavorite(pokemon.id)) {
+        axios.delete('https://pokedex20201.herokuapp.com/users/'.concat(localStorage.username, '/starred/', pokemon.name))
+          .then(() => setFavPokemons(favPokemons.filter((favPokemon) => favPokemon.id !== pokemon.id)))
+          .catch(error => {
+            setError(error.response.data);
+          });
+      console.log("teste000h");
     } else {
-      const newFavPokemons = favPokemons;
-      newFavPokemons.push(pokemon);
+      axios.post('https://pokedex20201.herokuapp.com/users/'.concat(localStorage.username, '/starred/', pokemon.name))
+        .then(response => response.data)
+        .then(favoritedPokemon => setFavPokemons([...favPokemons, favoritedPokemon]));
     }
-    setFavPokemons(newFavPokemons);
-
-    
-
-    
-    // axios.delete('https://pokedex20201.herokuapp.com/users/')
   }
-
-  // if (localStorage.user != "true" && localStorage.user != "") {
-  //   document.getElementById('favoriteButton').style.visibility = "visible"; 
-  // } else {
-  //   document.getElementById('favoriteButton').style.visibility = "hidden"; 
-  // }
-
-  // console.log(document.getElementById('favoriteButton').value);
-
-  // console.log(login.status);
 
   return (
     <div id="pokedex">
@@ -120,12 +119,11 @@ const Pokedex = () => {
               }}
             >
               <Pokemon pokemon={pokemon}/>
-              {/* {localStorage.username && <button id="favButton" onClick={() => handleFavorite(pokemon.id)}>{'<3'}</button> } */}
               
             </Link>
             { checkFavorite(pokemon.id) 
-              ? <button id="favButton" onClick={() => handleFavorite(pokemon.id)}><img src={FavImg} alt="favImg" /></button> 
-              : <button id="favButton" onClick={() => handleFavorite(pokemon.id)}><img src={NoFavImg} alt="noFavImg" /></button>
+              ? <button id="favButton" onClick={() => handleFavorite(pokemon)}><img src={FavImg} alt="favImg" /></button> 
+              : <button id="favButton" onClick={() => handleFavorite(pokemon)}><img src={NoFavImg} alt="noFavImg" /></button>
             }
           </div> 
         ))}

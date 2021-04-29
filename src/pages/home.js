@@ -3,7 +3,7 @@ import React from 'react';
 import './styles.css';
 
 const Home = props => {
-    console.log(localStorage.user);
+    console.log(localStorage.username);
     
     return (
         <div id="home">
