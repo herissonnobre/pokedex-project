@@ -3,16 +3,22 @@
 }
 
 #pokemonPortraitInside {
-    display: flex;  
-    flex: 0 0 100px;
+    display: flex;
+    width: 17%;  
+    justify-content: center;
+    flex-wrap: wrap;
+    /* flex: 0 0 100px;
     margin: 5px;
-    justify-content: space-between;
+    justify-content: space-between; */
 }
 
 .pokemonToten {
     display: flex;
     flex-direction: column;
-    align-self: center;
+    /* align-self: center; */
+    justify-content: center;
+    flex-wrap: wrap;
+    /* width: 17%; */
 }
 
 figure {
@@ -23,11 +29,13 @@ figure {
 
 #pokemonImg {
     border: 5px solid black;
+    border-radius: 25px;
 }
 
 #pokemonName {
     align-self: center;
     text-transform: capitalize;
+    margin: 5%;
 }
 
 input#favIcon {

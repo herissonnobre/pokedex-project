@@ -12,26 +12,30 @@ const Header = () => {
         localStorage.clear();
     };
 
+    console.log(localStorage.username);
+
     return (
         <div id="header">
             <h1 id="title">POKEDEX</h1>
             {/* <nav id="nav"> */}
             <div id="nav">
                 <ul id="links">
-                    <li id="home_link"><Link to="/">Home</Link></li>
-                    <li id="pokedex_link"><Link to="/pokedex">Pokedex</Link></li>
-                    <li id="login">
-                        <Link
-                            key="login"
-                            to ={{
-                                pathname:"/login",
-                                state: { background: location }
-                            }}
-                        >
-                            <input type="button" id="login_button" value="Login" />
-                        </Link>
+                    <li id="homeLink"><Link to="/">Home</Link></li>
+                    <li id="pokedexLink"><Link to="/pokedex">Pokedex</Link></li>
+                    <li id="userLink">
+                        { (localStorage.username === undefined)
+                            ?   <Link
+                                    id="loginLink"
+                                    to ={{
+                                        pathname:"/login",
+                                        state: { background: location }
+                                    }}
+                                >
+                                    <button id="loginButton">Login</button>
+                                </Link>
+                            :   <button id="logoutButton" onClick={handleLogout}>logout</button>
+                        }
                     </li>
-                    <li><button onClick={handleLogout}>logout</button></li>
                 </ul>
             </div>
         </div>
