@@ -91,13 +91,13 @@ const Pokedex = () => {
  
 
   
-  const handleFavorite = pokemon => {
-    if (checkFavorite(pokemon.id)) {
-        axios.delete('https://pokedex20201.herokuapp.com/users/'.concat(localStorage.username, '/starred/', pokemon.name))
-          .then(() => setFavPokemons(favPokemons.filter((favPokemon) => favPokemon.id !== pokemon.id)))
-          .catch(error => {
-            setError(error.response.data);
-          });
+  const handleFavorite = (pokemon, flag) => {
+    if (flag) {
+      axios.delete('https://pokedex20201.herokuapp.com/users/'.concat(localStorage.username, '/starred/', pokemon.name))
+        .then(() => setFavPokemons(favPokemons.filter((favPokemon) => favPokemon.id !== pokemon.id)))
+        .catch(error => {
+          setError(error.response.data);
+        });
       console.log("teste000h");
     } else {
       axios.post('https://pokedex20201.herokuapp.com/users/'.concat(localStorage.username, '/starred/', pokemon.name))
@@ -122,8 +122,8 @@ const Pokedex = () => {
               
             </Link>
             { checkFavorite(pokemon.id) 
-              ? <button id="favButton" onClick={() => handleFavorite(pokemon)}><img src={FavImg} alt="favImg" /></button> 
-              : <button id="favButton" onClick={() => handleFavorite(pokemon)}><img src={NoFavImg} alt="noFavImg" /></button>
+              ? <button id="favButton" onClick={() => handleFavorite(pokemon, true)}><img src={FavImg} alt="favImg" /></button> 
+              : <button id="favButton" onClick={() => handleFavorite(pokemon, false)}><img src={NoFavImg} alt="noFavImg" /></button>
             }
           </div> 
         ))}

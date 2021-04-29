@@ -48,6 +48,10 @@ const ModalView = () => {
             >
                 <h1>{clickedPokemon.name}</h1>
                 <img src={clickedPokemon.image_url} alt={clickedPokemon.name} />
+                <p>Tipo: {clickedPokemon.kind}</p>
+                <p>Número: {clickedPokemon.number}</p>
+                <p>Peso: {clickedPokemon.weight}</p>
+                <p>Altura: {clickedPokemon.height}</p>
             <button type="button" onClick={back}>
                 Close
             </button>
