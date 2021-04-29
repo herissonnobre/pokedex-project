@@ -138,12 +138,12 @@ const Pokedex = () => {
         onPageChange={handlePageChange}
         onPageActive={handleActivePage}
         containerClassName={"pagination"}
-        previousLinkClassName={"pagination__link"}
-        nextLinkClassName={"pagination__link"}
-        disabledClassName={"pagination__link--disabled"}
-        activeClassName={"pagination__link--active"}
+        previousLinkClassName={"paginationLink"}
+        nextLinkClassName={"paginationLink"}
+        disabledClassName={"paginationLinkDisabled"}
+        activeClassName={"paginationLinkActive"}
       />
-      </div>
+    </div>
     );
 };
 

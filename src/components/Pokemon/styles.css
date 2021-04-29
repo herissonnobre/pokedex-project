@@ -2,15 +2,15 @@
     background-color: white;
 }
 
-#pokemonPortraitInside {
+/* #pokemonPortraitInside {
     display: flex;
     width: 17%;  
     justify-content: center;
     flex-wrap: wrap;
-    /* flex: 0 0 100px;
+    flex: 0 0 100px;
     margin: 5px;
-    justify-content: space-between; */
-}
+    justify-content: space-between;
+} */
 
 .pokemonToten {
     display: flex;

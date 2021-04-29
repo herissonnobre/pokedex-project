@@ -7,8 +7,9 @@
 #pokedex {
   display: flex;
   flex-direction: column;
-  align-content: center;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0px;
 }
 
 /* .pageHeader {
@@ -38,30 +39,39 @@
     
 } 
 
+#pokemonToten {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .pagination {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   list-style: none;
   cursor: pointer;
+  padding: 20px 0px;
+  margin: 10px 0px;
+  width: 80%;
 }
   
 .pagination a {
-  padding: 10px;
-  border-radius: 5px;
+  padding: 5px 10px;
+  border-radius: 15px;
   border: 1px solid #6c7ac9;
   color: #6c7ac9;
 }
 
-.pagination__link {
+.paginationLink {
   font-weight: bold;
 }
 
-.pagination__link--active a {
+.paginationLinkActive a {
   color: #fff;
   background: #6c7ac9;
 }
 
-.pagination__link--disabled a {
+.paginationLinkDisabled a {
   color: rgb(198, 197, 202);
   border: 1px solid rgb(198, 197, 202);
 }
@@ -70,5 +80,6 @@
   width: 20px;
   height: 20px;
   padding: 0px;
+  align-self: center;
 }
 
