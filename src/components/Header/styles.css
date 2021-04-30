@@ -16,6 +16,7 @@
 
 li {
     align-self: center;
+    color: black;
 }
 
 #loginLink {
@@ -31,6 +32,7 @@ li {
     font-size: 16px;
     background-color: #4CAF50;
     text-decoration: none;
+    color: black;
 }
 
 button {

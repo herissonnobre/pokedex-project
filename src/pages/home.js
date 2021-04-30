@@ -1,5 +1,4 @@
 import React from 'react';
-// import FavImg from '../icons/HeartIcon_WB.svg';
 import './styles.css';
 
 const Home = props => {

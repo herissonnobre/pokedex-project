@@ -63,27 +63,25 @@ const Login = () => {
     };
 
     return (
-        <div id="divContainer">
+        <div id="divLoginContainer">
             <div id="loginContainer">
-                <div id="loginWrapper">
-                    <div id="buttonContainer">
-                        <button id="closeBbutton" onClick={back}>
-                            X
-                        </button>
-                    </div>
-                    <form id="loginForm" onSubmit={handleSubmit}>
-                        <label id="usernameInput">
-                            <p>Treinador pokemon, como se chama?</p>
-                            <input
-                                type="text"
-                                id="username"
-                                onChange={handleChange}
-                                required
-                            />
-                        </label>
-                        <button type="submit" id="loginButton">Login</button>
-                    </form>
+                <div id="buttonContainer">
+                    <button id="closeButton" onClick={back}>
+                        X
+                    </button>
                 </div>
+                <form id="loginForm" onSubmit={handleSubmit}>
+                    <label id="usernameInput">
+                        <p>Treinador pokemon, como se chama?</p>
+                        <input
+                            type="text"
+                            id="username"
+                            onChange={handleChange}
+                            required
+                        />
+                    </label>
+                    <button type="submit" id="loginButton">Login</button>
+                </form>
             </div>
         </div>
     )

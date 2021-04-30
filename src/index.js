@@ -12,6 +12,4 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-// reportWebVitals(console.log);
 reportWebVitals();
-// https://bit.ly/CRA-vitals;
