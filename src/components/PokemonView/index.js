@@ -1,7 +1,9 @@
 import { match, useParams, useHistory, useLocation } from 'react-router-dom';
 
+import './styles.css';
+
     
-const ModalView = () => {
+const PokemonView = () => {
     
     let history = useHistory();
     let { id } = useParams();
@@ -20,29 +22,8 @@ const ModalView = () => {
     };
 
     return (
-        <div
-            onClick={back}
-            style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            bottom: 0,
-            right: 0,
-            background: "rgba(0, 0, 0, 0.15)"
-            }}
-        >
-            <div
-            className="modal"
-            style={{
-                position: "absolute",
-                background: "#fff",
-                top: 25,
-                left: "10%",
-                right: "10%",
-                padding: 15,
-                border: "2px solid #444"
-            }}
-            >
+        <div id="divContainer" onClick={back}>
+            <div id="pokemonView">
                 <h1>{clickedPokemon.name}</h1>
                 <img src={clickedPokemon.image_url} alt={clickedPokemon.name} />
                 <p>Tipo: {clickedPokemon.kind}</p>
@@ -57,4 +38,4 @@ const ModalView = () => {
     );
 };
 
-export default ModalView;
+export default PokemonView;

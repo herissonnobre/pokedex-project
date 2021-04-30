@@ -4,7 +4,7 @@ import { Route, Switch, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './pages/home';
 import Pokedex from './pages/pokedex';
-import ModalView from './components/ModalView';
+import PokemonView from './components/PokemonView';
 import Login from './components/Login';
 
 import './routes.css';
@@ -21,12 +21,9 @@ const Routes = () => {
             <Switch>
                 <Route className="Home" exact path="/" component={Home} />
                 <Route className="Pokedex" exact path="/pokedex" component={Pokedex} />
-                {/* <Route className="PokemonInfo" path="/pokedex/:id" component={PokemonView} /> */}
-                {/* <Route className="Login" path="/login" component={Login} /> */}
-                {/* <PrivateRoute className="AuthRoute" path="/logged" component={() => <h1>Você está logado!</h1>} /> */}
             </Switch>
 
-            {background && <Route path="/pokedex/:id" component={ModalView} />}
+            {background && <Route path="/pokedex/:id" component={PokemonView} />}
             {background && <Route path="/login" component={Login} />}
         </div> 
     )

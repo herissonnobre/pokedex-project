@@ -63,34 +63,17 @@ const Login = () => {
     };
 
     return (
-        <div
-            style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            bottom: 0,
-            right: 0,
-            background: "rgba(0, 0, 0, 0.15)"
-            }}
-        >
-            <div
-            className="modal"
-            style={{
-                position: "absolute",
-                background: "#fff",
-                top: 25,
-                left: "10%",
-                right: "10%",
-                padding: 15,
-                border: "2px solid #444"
-            }}
-            >
-        
-        
-                <div id = "loginWrapper">
+        <div id="divContainer">
+            <div id="loginContainer">
+                <div id="loginWrapper">
+                    <div id="buttonContainer">
+                        <button id="closeBbutton" onClick={back}>
+                            X
+                        </button>
+                    </div>
                     <form id="loginForm" onSubmit={handleSubmit}>
-                        <p>Treinador pokemon, como se chama?</p>
-                        <label>
+                        <label id="usernameInput">
+                            <p>Treinador pokemon, como se chama?</p>
                             <input
                                 type="text"
                                 id="username"
@@ -100,9 +83,6 @@ const Login = () => {
                         </label>
                         <button type="submit" id="loginButton">Login</button>
                     </form>
-                    <button type="button" onClick={back}>
-                        Close
-                    </button>
                 </div>
             </div>
         </div>
