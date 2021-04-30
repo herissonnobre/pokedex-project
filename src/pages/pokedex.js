@@ -1,37 +1,36 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Paginate from 'react-paginate';
-import { useHistory, useParams, Link, useLocation } from 'react-router-dom';
-import { ReactSVG } from 'react-svg';
-import Pokemon from '../components/Pokemon';
+import { useHistory, Link, useLocation } from 'react-router-dom';
 
+import Pokemon from '../components/Pokemon';
 import FavImg from '../icons/HeartIcon_WB.svg';
 import NoFavImg from '../icons/HeartIcon_WOB.svg';
+
 import './styles.css';
 
 const Pokedex = () => {
-  
   const [currentPage, setCurrentPage] = useState(1);
   const [currentUser, setCurrentUser] = useState();
-  // const [currentUsername, setCurrentUsername] = useState(localStorage.username);
   const [pokemons, setPokemons] = useState([]);
   const [favPokemons, setFavPokemons] = useState([]);
   const [fetchedFavPokemons, setFetchedFavPokemons] = useState([]);
   const [error, setError] = useState("");
-  const [repositories, setRepositories] = useState([]);
+
   const [user, setUser] = useState({
     user: {
       username: localStorage.username
     },
     pokemons: []
   });
+
+  const [username, setUsername] = useState(localStorage.username);
   
   let newFavPokemons = [];
 
   let location = useLocation();
 
-  console.log(localStorage.username);
-
+  let history = useHistory();
 
   const handlePageChange = ({ selected: selectedPage}) => {
     const temp = selectedPage + 1;
@@ -53,56 +52,51 @@ const Pokedex = () => {
         setError(error.response.data);
       }
     }
-
     fetchPokemons();
   }, [currentPage]);
 
   useEffect(() => {
     async function fetchFavPokemons() {
-      try {  
-        const response = await axios.get('https://pokedex20201.herokuapp.com/users/' + localStorage.username);
-        // const favoritedPokemons = response.data.pokemons;
-        // const contextUser = response.data.user;
-        // console.log(favoritedPokemons);
-        setFetchedFavPokemons(response.data.pokemons);
-        setCurrentUser(response.data.user);
-        // setUser(...user, { user: userResponse.data.user });
-      } catch (error) {
-        setError(error.response.data);
+      if (username) {
+        try {  
+          const response = await axios.get('https://pokedex20201.herokuapp.com/users/' + username);
+          setFetchedFavPokemons(response.data.pokemons);
+          setCurrentUser(response.data.user);
+        } catch (error) {
+          setError(error.response.data);
+        }
       }
     }
-
     fetchFavPokemons();
+  }, [username, favPokemons]);
+
+  useEffect(() => {
+    const handleUserChange = () => {
+      setUsername(localStorage.username);
+    }
+    handleUserChange(); 
   }, [localStorage.username]);
 
-
   const checkFavorite = ( pokemonId ) => {
-    // const newRepositories = repositories.map(repo => {
-    //   return repo.id === id ? { ...repo, favorite: true } : repo
-    // });
-    // setRepositories(newRepositories);
-
     const favItem = fetchedFavPokemons.find(element => element.id === pokemonId);
-
-    if (localStorage && favItem !== undefined)
+    if (username && favItem !== undefined)
       return true;
   }
 
- 
-
-  
   const handleFavorite = (pokemon, flag) => {
     if (flag) {
-      axios.delete('https://pokedex20201.herokuapp.com/users/'.concat(localStorage.username, '/starred/', pokemon.name))
+      axios.delete('https://pokedex20201.herokuapp.com/users/'.concat(username, '/starred/', pokemon.name))
         .then(() => setFavPokemons(favPokemons.filter((favPokemon) => favPokemon.id !== pokemon.id)))
         .catch(error => {
-          setError(error.response.data);
+          setError(error);
         });
-      console.log("teste000h");
     } else {
-      axios.post('https://pokedex20201.herokuapp.com/users/'.concat(localStorage.username, '/starred/', pokemon.name))
+      axios.post('https://pokedex20201.herokuapp.com/users/'.concat(username, '/starred/', pokemon.name))
         .then(response => response.data)
-        .then(favoritedPokemon => setFavPokemons([...favPokemons, favoritedPokemon]));
+        .then(favoritedPokemon => setFavPokemons([...favPokemons, favoritedPokemon]))
+        .catch(error => {
+          setError(error);
+        });
     }
   }
 
@@ -118,17 +112,17 @@ const Pokedex = () => {
                 state: { background: location, pokemonArray: pokemons }
               }}
             >
-              <Pokemon pokemon={pokemon}/>
-              
+              <Pokemon pokemon={pokemon}/>  
             </Link>
-            { checkFavorite(pokemon.id) 
-              ? <button id="favButton" onClick={() => handleFavorite(pokemon, true)}><img src={FavImg} alt="favImg" /></button> 
-              : <button id="favButton" onClick={() => handleFavorite(pokemon, false)}><img src={NoFavImg} alt="noFavImg" /></button>
+            { username && (        
+                checkFavorite(pokemon.id) 
+                ? <button id="favButton" onClick={() => handleFavorite(pokemon, true)}><img src={FavImg} alt="favImg" /></button> 
+                : <button id="favButton" onClick={() => handleFavorite(pokemon, false)}><img src={NoFavImg} alt="noFavImg" /></button>
+              )
             }
           </div> 
         ))}
       </div>
-      
       <Paginate
         previousLabel={"← Previous"}
         nextLabel={"Next →"}

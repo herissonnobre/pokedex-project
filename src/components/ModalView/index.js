@@ -11,9 +11,6 @@ const ModalView = () => {
     const index = parseInt(id, 10);
     const clickedPokemon = pokemonArray.find(pokemon => pokemon.id === index);
 
-    console.log(id);
-    console.log(history);
-
     if (!clickedPokemon)
         return null;
 
@@ -52,9 +49,9 @@ const ModalView = () => {
                 <p>Número: {clickedPokemon.number}</p>
                 <p>Peso: {clickedPokemon.weight}</p>
                 <p>Altura: {clickedPokemon.height}</p>
-            <button type="button" onClick={back}>
-                Close
-            </button>
+                <button type="button" onClick={back}>
+                    Close
+                </button>
             </div>
         </div>
     );

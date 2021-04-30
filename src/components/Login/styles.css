@@ -1,4 +1,4 @@
-/* div#modal {
+div#modal {
     position: absolute;
     top: 0;
     left: 0;
@@ -15,7 +15,7 @@ div#loginWrapper {
     right: 10%;
     padding: 15;
     border: 2px solid #444;
-} */
+}
 
 #loginWrapper {
     display: flex;

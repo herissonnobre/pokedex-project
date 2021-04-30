@@ -1,29 +1,47 @@
-import { React, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { React, useEffect, useState } from 'react';
+import { Link, useLocation, useHistory } from 'react-router-dom';
 import Login from '../Login';
 import './styles.css';
 
 const Header = () => {
+    const [username, setUsername] = useState(localStorage.username);
+
     let location = useLocation();
+    let history = useHistory();
     
-    // const [loggedUser, setLoggedUser] = useState(localStorage.getItem("username"));
-
-    const handleLogout = () => {
+    useEffect(() => {
+        const handleUserChange = () => {
+            setUsername(localStorage.username);
+        }
+        handleUserChange();
+    }, [localStorage.username]);
+      
+    const handleLogout = event => {
         localStorage.clear();
+        setUsername(localStorage.username);
+        history.go(0);
     };
-
-    console.log(localStorage.username);
 
     return (
         <div id="header">
             <h1 id="title">POKEDEX</h1>
-            {/* <nav id="nav"> */}
             <ul id="nav">
                 <li id="homeLinkLi"><Link id="homeLink" to="/">Home</Link></li>
-                <li id="pokedexLinkLi"><Link id="pokedexLink" to="/pokedex">Pokedex</Link></li>
+                <li id="pokedexLinkLi">
+                    <Link
+                        id="pokedexLink"
+                        to={{
+                            pathname: "/pokedex",
+                            state: { user: username }
+                        }}
+                    >
+                        Pokedex
+                    </Link>
+                </li>
                 <li id="userLinkLi">
-                    { (localStorage.username === undefined)
-                        ?   <Link
+                    { (username !== undefined && username !== null)
+                        ?   <button id="logoutButton" onClick={handleLogout}>Logout</button>
+                        :   <Link
                                 id="loginLink"
                                 to ={{
                                     pathname:"/login",
@@ -32,7 +50,6 @@ const Header = () => {
                             >
                                 <button id="loginButton">Login</button>
                             </Link>
-                        :   <button id="logoutButton" onClick={handleLogout}>logout</button>
                     }
                 </li>
             </ul>
